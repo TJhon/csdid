@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Alexander Quispe Rojas">
+<meta name="dcterms.date" content="2024-08-20">
+
+<title>Getting Started with the CSDID Package</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="csdid_basic_files/libs/clipboard/clipboard.min.js"></script>
+<script src="csdid_basic_files/libs/quarto-html/quarto.js"></script>
+<script src="csdid_basic_files/libs/quarto-html/popper.min.js"></script>
+<script src="csdid_basic_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="csdid_basic_files/libs/quarto-html/anchor.min.js"></script>
+<link href="csdid_basic_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="csdid_basic_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="csdid_basic_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="csdid_basic_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="csdid_basic_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Getting Started with the CSDID Package</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Alexander Quispe Rojas </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 20, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>This vignette discusses the basics of using Difference-in-Differences (DiD) designs to identify and estimate the average effect of participating in a treatment with a particular focus on tools from the <strong>csdid</strong> package. The background article for it is <a href="https://doi.org/10.1016/j.jeconom.2020.12.001">Callaway and Sant’Anna (2021), “Difference-in-Differences with Multiple Time Periods”</a>.</p>
+<ul>
+<li><p>The <strong>csdid</strong> package allows for multiple periods and variation in treatment timing</p></li>
+<li><p>The <strong>csdid</strong> package allows the parallel trends assumption to hold conditional on covariates</p></li>
+<li><p>Treatment effect estimates coming from the <strong>csdid</strong> package do not suffer from any of the drawbacks associated with two-way fixed effects regressions or event study regressions when there are multiple periods / variation in treatment timing</p></li>
+<li><p>The <strong>csdid</strong> package can deliver disaggregated <em>group-time average treatment effects</em> as well as event-study type estimates (treatment effects parameters corresponding to different lengths of exposure to the treatment) and overall treatment effect estimates.</p></li>
+</ul>
+</section>
+<section id="examples-with-simulated-data" class="level1">
+<h1>Examples with simulated data</h1>
+<p>Let’s start with a really simple example with simulated data. Here, there are going to be 4 time periods. There are 4000 units in the treated group that are randomly (with equal probability) assigned to first participate in the treatment (a <em>group</em>) in each time period. And there are 4000 ``never treated’’ units. The data generating process for untreated potential outcomes</p>
+<p><span class="math display">\[
+  Y_{it}(0) = \theta_t + \eta_i + X_i'\beta_t + v_{it}
+\]</span></p>
+<p>This is an example of a very simple model for untreated potential outcomes that is compatible with a conditional parallel trends assumption. In particular,</p>
+<ul>
+<li><p>We consider the case where <span class="math inline">\(\eta_i\)</span> can be distributed differently across groups. This means that comparisons of outcomes in levels between treated and untreated units will not deliver an average treatment effect parameter.</p></li>
+<li><p>Next, notice that <span class="math display">\[ \Delta Y_{it}(0) = (\theta_t - \theta_{t-1}) + X_i'(\beta_t - \beta_{t-1}) + \Delta v_{it} \]</span></p>
+<p>so that the path of outcomes depends on covariates. And, in general, unconditional parallel trends is not valid in this setup unless either (i) the mean of the covariates is the same across groups (e.g., when treatment groups are independent of covariates), or (ii) <span class="math inline">\(\beta_t = \beta_{t-1} = \cdots = \beta_{1}\)</span> (this is the case when the path of untreated potential outcomes doesn’t actually depend on covariates).</p></li>
+<li><p>In order to think about treatment effects, we also use the following stylized model for treated potential outcomes <span class="math display">\[
+  Y_{it}(g) = Y_{it}(0)  + \mathbf{1}\{t \geq g\} (e+1) + ( u_{it} - v_{it})  \]</span></p>
+<p>where <span class="math inline">\(e := t-g\)</span> is the event time (i.e., the difference between the current time period and the time when a unit becomes treated), and the last term just allows for the error terms to be different for treated and untreated potential outcomes. It immediately follows that, in this particular example, <span class="math display">\[ATT(g,t) = e+1\]</span> for all post-treatment periods <span class="math inline">\(t \ge g\)</span>.</p>
+<p>In other words, the average effect of participating in the treatment for units in group <span class="math inline">\(g\)</span> is equal to their length of exposure plus one. Note that, for simplicity, we are considering the case where treatment effects are homogeneous across groups. Also, in this setup, units do not anticipate their treatment status, so the <em>no-anticipation assumption</em> is also satisfied.</p></li>
+<li><p>For the simulations, we also set</p>
+<ul>
+<li><span class="math inline">\(\theta_t = \beta_t = t\)</span> for <span class="math inline">\(t=1,\ldots,4\)</span>
+<ul>
+<li><span class="math inline">\(\eta_i \sim N(G_i, 1)\)</span> where <span class="math inline">\(G_i\)</span> is which group an individual belongs to,</li>
+<li><span class="math inline">\(X_i \sim N( \mu_{D_i}, 1)\)</span> where <span class="math inline">\(\mu_{D_i} = 1\)</span> for never treated units and 0 otherwise,</li>
+<li><span class="math inline">\(v_{it} \sim N(0,1)\)</span>, and <span class="math inline">\(u_{it} \sim N(0,1)\)</span>.<br>
+</li>
+<li>Also, all random variables are drawn independently of each other.</li>
+</ul></li>
+</ul></li>
+</ul>
+<section id="estimating-group-time-average-treatment-effects" class="level2">
+<h2 class="anchored" data-anchor-id="estimating-group-time-average-treatment-effects">Estimating Group-Time Average Treatment Effects</h2>
+<p><strong>Using the R Simulated dataset</strong></p>
+<p>See <a href="https://bcallaway11.github.io/did/articles/did-basics.html"><code>R - Getting Started with the did Package</code></a></p>
+<div id="efc3e36c" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pip install git+https://github.com/d2cml-ai/csdid/</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># pip install git+https://github.com/d2cml-ai/DRDID</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> csdid.att_gt <span class="im">import</span> ATTgt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="1151543e" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dta <span class="op">=</span> pd.read_csv(<span class="st">"./data/dta.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>dta.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">G</th>
+<th data-quarto-table-cell-role="th">X</th>
+<th data-quarto-table-cell-role="th">id</th>
+<th data-quarto-table-cell-role="th">cluster</th>
+<th data-quarto-table-cell-role="th">period</th>
+<th data-quarto-table-cell-role="th">Y</th>
+<th data-quarto-table-cell-role="th">treat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>3</td>
+<td>-0.876233</td>
+<td>1</td>
+<td>5</td>
+<td>1</td>
+<td>5.562556</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>3</td>
+<td>-0.876233</td>
+<td>1</td>
+<td>5</td>
+<td>2</td>
+<td>4.349213</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>3</td>
+<td>-0.876233</td>
+<td>1</td>
+<td>5</td>
+<td>3</td>
+<td>7.134037</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>3</td>
+<td>-0.876233</td>
+<td>1</td>
+<td>5</td>
+<td>4</td>
+<td>6.243056</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>2</td>
+<td>-0.873848</td>
+<td>2</td>
+<td>36</td>
+<td>1</td>
+<td>-3.659387</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p><strong>Estimating Group-Time Average Treatment Effects</strong></p>
+<p>The main function to estimate group-time average treatment effects is the <code>ATTgt(...).fit()</code> function. The most basic call to <code>att_gt</code> is given in the following</p>
+<div id="bd851496" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>example_attgt <span class="op">=</span> ATTgt(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    yname<span class="op">=</span><span class="st">"Y"</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    tname<span class="op">=</span><span class="st">"period"</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    idname<span class="op">=</span><span class="st">"id"</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    gname<span class="op">=</span><span class="st">"G"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    xformla<span class="op">=</span><span class="st">"Y~X"</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>dta</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>).fit()</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>example_attgt.summ_attgt().summary2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Group</th>
+<th data-quarto-table-cell-role="th">Time</th>
+<th data-quarto-table-cell-role="th">ATT(g, t)</th>
+<th data-quarto-table-cell-role="th">Post</th>
+<th data-quarto-table-cell-role="th">Std. Error</th>
+<th data-quarto-table-cell-role="th">[95% Pointwise</th>
+<th data-quarto-table-cell-role="th">Conf. Band]</th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2</td>
+<td>2</td>
+<td>0.9209</td>
+<td>0</td>
+<td>0.0659</td>
+<td>0.7343</td>
+<td>1.1075</td>
+<td>*</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2</td>
+<td>3</td>
+<td>1.9875</td>
+<td>0</td>
+<td>0.0648</td>
+<td>1.8039</td>
+<td>2.1711</td>
+<td>*</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>2</td>
+<td>4</td>
+<td>2.9552</td>
+<td>0</td>
+<td>0.0587</td>
+<td>2.7890</td>
+<td>3.1215</td>
+<td>*</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>3</td>
+<td>2</td>
+<td>-0.0433</td>
+<td>0</td>
+<td>0.0642</td>
+<td>-0.2251</td>
+<td>0.1385</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>3</td>
+<td>3</td>
+<td>1.1080</td>
+<td>0</td>
+<td>0.0671</td>
+<td>0.9182</td>
+<td>1.2979</td>
+<td>*</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>3</td>
+<td>4</td>
+<td>2.0590</td>
+<td>0</td>
+<td>0.0621</td>
+<td>1.8833</td>
+<td>2.2348</td>
+<td>*</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>4</td>
+<td>2</td>
+<td>0.0023</td>
+<td>0</td>
+<td>0.0643</td>
+<td>-0.1799</td>
+<td>0.1845</td>
+<td></td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>4</td>
+<td>3</td>
+<td>0.0615</td>
+<td>0</td>
+<td>0.0604</td>
+<td>-0.1096</td>
+<td>0.2327</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>4</td>
+<td>4</td>
+<td>0.9523</td>
+<td>0</td>
+<td>0.0619</td>
+<td>0.7769</td>
+<td>1.1277</td>
+<td>*</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>The summary of <code>example_attgt</code> provides estimates of the group-time average treatment effects in the column labeled <code>att</code>, and the corresponding bootstrapped-based standard errors are given in the column <code>se</code>. The corresponding groups and times are given in the columns <code>group</code> and <code>time</code>. Under the no-anticipation and parallel trends assumptions, group-time average treatment effects are identified in periods when <span class="math inline">\(t \geq g\)</span> (i.e., post-treatment periods for each group). The table also reports pseudo group-time average treatment effects when <span class="math inline">\(t &lt; g\)</span> (i.e., pre-treatment periods for group <span class="math inline">\(g\)</span>). These can be used as a pre-test for the parallel trends assumption (as long as we assume that the no-anticipation assumption indeed holds). In addition, the results of a Wald pre-test of the parallel trends assumption is reported in the summary of the results.</p>
+<p>Next, we’ll demonstrate how to plot group-time average treatment effects.</p>
+<div id="053b905d" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the results</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>example_attgt.plot_attgt()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="csdid_basic_files/figure-html/cell-5-output-1.png" width="950" height="515" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The resulting figure is one that contains separate plots for each group. Notice in the figure above, the first plot is labeled “Group 2”, the second “Group 3”, etc. Then, the figure contains estimates of group-time average treatment effects for each group in each time period along with a simultaneous confidence interval. The red dots in the plots are pre-treatment pseudo group-time average treatment effects and are most useful for pre-testing the parallel trends assumption. The blue dots are post-treatment group-time average treatment effects and should be interpreted as the average effect of participating in the treatment for units in a particular group at a particular point in time.</p>
+</section>
+<section id="other-features-of-the-csdid-package" class="level2">
+<h2 class="anchored" data-anchor-id="other-features-of-the-csdid-package">Other features of the <code>csdid</code> package</h2>
+<p>The above discussion covered only the most basic case for using the <code>csdid</code> package. There are a number of simple extensions that are useful in applications.</p>
+<section id="adjustments-for-multiple-hypothesis-testing" class="level3">
+<h3 class="anchored" data-anchor-id="adjustments-for-multiple-hypothesis-testing">Adjustments for Multiple Hypothesis Testing</h3>
+<p>By default, the <code>csdid</code> package reports simultaneous confidence bands in plots of group-time average treatment effects with multiple time periods – these are confidence bands that are robust to multiple hypothesis testing. You can turn this off and compute analytical standard errors and corresponding figures with <em>pointwise</em> confidence intervals by setting <code>bstrap=False</code> in the call to <code>att_gt</code>…<strong>but we don’t recommend it</strong>!</p>
+</section>
+<section id="aggregating-group-time-average-treatment-effects" class="level3">
+<h3 class="anchored" data-anchor-id="aggregating-group-time-average-treatment-effects">Aggregating group-time average treatment effects</h3>
+<p>In many applications, there can be a large number of groups and time periods. In this case, it may be infeasible to interpret plots of group-time average treatment effects. The <code>csdid</code> package provides a number of ways to aggregate group-time average treatment effects using the <code>aggte</code> function.</p>
+<section id="simple-aggregation" class="level4">
+<h4 class="anchored" data-anchor-id="simple-aggregation">Simple Aggregation</h4>
+<p>One idea that is likely to immediately come to mind is to just return a weighted average of all group-time average treatment effects with weights proportional to the group size. This is available by calling the <code>aggte</code> function with <code>type = simple</code>.</p>
+<div id="efda8615" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>example_attgt.aggte(<span class="st">"simple"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+   ATT Std. Error [95.0%  Conf. Int.]  
+1.6583      0.035 1.5897        1.727 *
+
+
+---
+Signif. codes: `*' confidence band does not cover 0
+Control Group:  Never Treated , 
+Anticipation Periods:  0
+Estimation Method:  Doubly Robust
+
+</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<pre><code>&lt;csdid.att_gt.ATTgt at 0x175fd2a6440&gt;</code></pre>
+</div>
+</div>
+<p>This sort of aggregation immediately avoids the negative weights issue that two-way fixed effects regressions can suffer from, but we often think that <em>there are better alternatives</em>. In particular, this <code>simple</code> aggregation tends to overweight the effect of early-treated groups simply because we observe more of them during post-treatment periods. We think there are likely to be better alternatives in most applications.</p>
+<!-- #### Dynamic Effects and Event Studies
+
+One of the most common alternative approaches is to aggregate group-time effects into an event study plot.  Group-time average treatment effects can immediately be averaged into average treatment effects at different lengths of exposure to the treatment using the following code:
+
+::: {#d1c748ed .cell execution_count=6}
+``` {.python .cell-code}
+# example_attgt.aggte('dynamic')
+# ggdid(agg.es)
+```
+:::
+
+
+In this figure, the x-axis is the length of exposure to the treatment.  Length of exposure equal to 0 provides the average effect of participating in the treatment across groups in the time period when they first participate in the treatment (instantaneous treatment effect).  Length of exposure equal to -1 corresponds to the time period before groups first participate in the treatment, and length of exposure equal to 1 corresponds to the first time period after initial exposure to the treatment.
+
+As we would expect based on the data that we generated, it looks like parallel trends holds in pre-treatment periods and the effect of participating in the treatment is increasing with length of exposure of the treatment.
+
+The Overall ATT here averages the average treatment effects across all lengths of exposure to the treatment. -->
+</section>
+<section id="group-specific-effects" class="level4">
+<h4 class="anchored" data-anchor-id="group-specific-effects">Group-Specific Effects</h4>
+<p>Another idea is to look at average effects specific to each group. It is also straightforward to aggregate group-time average treatment effects into group-specific average treatment effects using the following code:</p>
+<div id="f734ecf3" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>example_attgt.aggte(<span class="st">"group"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>example_attgt.plot_aggte()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+Overall summary of ATT's based on group/cohort aggregation:
+  ATT Std. Error [95.0%  Conf. Int.]  
+1.488     0.0331 1.4233       1.5528 *
+
+
+Group Effects:
+   Group  Estimate  Std. Error  [95.0% Simult.   Conf. Band   
+0      2    1.9545      0.0487           1.8590      2.0501  *
+1      3    1.5835      0.0586           1.4687      1.6983  *
+2      4    0.9523      0.0654           0.8242      1.0804  *
+---
+Signif. codes: `*' confidence band does not cover 0
+Control Group:  Never Treated , 
+Anticipation Periods:  0
+Estimation Method:  Doubly Robust
+
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="csdid_basic_files/figure-html/cell-8-output-2.png" width="950" height="462" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In this figure, the y-axis is categorized by group. The x-axis provides estimates of the average effect of participating in the treatment for units in each group averaged across all time periods after that group becomes treated. In our example, the average effect of participating in the treatment is largest for group 2 – this is because the effect of treatment here increases with length of exposure to the treatment, and they are the group that is exposed to the treatment for the longest.</p>
+<p>The Overall ATT averages the group-specific treatment effects across groups. In our view, <em>this parameter is a leading choice as an overall summary effect of participating in the treatment</em>. It is the average effect of participating in the treatment that was experienced across all units that participate in the treatment in any period. In this sense, it has a similar interpretation to the ATT in the textbook case where there are exactly two periods and two groups.</p>
+</section>
+<section id="calendar-time-effects" class="level4">
+<h4 class="anchored" data-anchor-id="calendar-time-effects">Calendar Time Effects</h4>
+<p>Finally, the <code>csdid</code> package allows aggregations across different time periods. To do this</p>
+<div id="a97e5139" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>example_attgt.aggte(<span class="st">'calendar'</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>example_attgt.plot_aggte()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+Overall summary of ATT's based on calendar time aggregation:
+   ATT Std. Error [95.0%  Conf. Int.]  
+1.4808     0.0365 1.4093       1.5523 *
+
+
+Time Effects (calendar):
+   Time  Estimate  Std. Error  [95.0% Simult.   Conf. Band   
+0     2    0.9209      0.0642           0.7950      1.0468  *
+1     3    1.5491      0.0513           1.4486      1.6496  *
+2     4    1.9724      0.0492           1.8759      2.0688  *
+---
+Signif. codes: `*' confidence band does not cover 0
+Control Group:  Never Treated , 
+Anticipation Periods:  0
+Estimation Method:  Doubly Robust
+
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="csdid_basic_files/figure-html/cell-9-output-2.png" width="950" height="462" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In this figure, the x-axis is the time period and the estimates along the y-axis are the average effect of participating in the treatment in a particular time period for all groups that participated in the treatment in that time period.</p>
+</section>
+</section>
+<section id="small-group-sizes" class="level3">
+<h3 class="anchored" data-anchor-id="small-group-sizes">Small Group Sizes</h3>
+<p>Small group sizes can sometimes cause estimation problems in the <code>csdid</code> package. To give an example, if there are any groups that have fewer observations than the number of covariates in the model, the code will error. The <code>csdid</code> package reports a warning if there are any groups that have fewer than 5 observations.</p>
+<p>In addition, statistical inference, particularly on group-time average treatment may become more tenuous with small groups. For example, the effective sample size for estimating the change in outcomes over time for individuals in a particular group is equal to the number of observations in that group and asymptotic results are unlikely to provide good approximations to the sampling distribution of group-time average treatment effects when the number of units in a group is small. In these cases, one should be very cautious about interpreting the <span class="math inline">\(ATT(g,t)\)</span> results for these small groups.</p>
+<p>A reasonable alternative approach in this case is to just focus on aggregated treatment effect parameters (i.e., to run <code>aggte(..., type = "group")</code> or <code>aggte(...,type = "dynamic")</code>). For each of these cases, the effective sample size is the total number of units that are ever treated. As long as the total number of ever treated units is “large” (which should be the case for many DiD application), then the statistical inference results provided by the <code>csdid</code> package should be more stable.</p>
+</section>
+<section id="selecting-alternative-control-groups" class="level3">
+<h3 class="anchored" data-anchor-id="selecting-alternative-control-groups">Selecting Alternative Control Groups</h3>
+<p>By default, the <code>csdid</code> package uses the group of units that never participate in the treatment as the control group. In this case, if there is no group that never participates, then the <code>csdid</code> package will drop the last period and set units that do not become treated until the last period as the control group (this will also throw a warning). The other option for the control group is to use the “not yet treated”. The “not yet treated” include the never treated as well as those units that, for a particular point in time, have not been treated yet (though they eventually become treated). This group is at least as large as the never treated group though it changes across time periods. To use the “not yet treated” as the control, set the option <code>control_group="notyettreated"</code>.</p>
+<div id="47014a02" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>example_attgt_altcontrol <span class="op">=</span> ATTgt(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    yname<span class="op">=</span><span class="st">"Y"</span>,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    tname<span class="op">=</span><span class="st">"period"</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    idname<span class="op">=</span><span class="st">"id"</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    gname<span class="op">=</span><span class="st">"G"</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    xformla<span class="op">=</span><span class="st">"Y~X"</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>dta,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    control_group<span class="op">=</span><span class="st">"notyettreated"</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>).fit()</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>example_attgt_altcontrol.summ_attgt().summary2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="repeated-cross-sections" class="level3">
+<h3 class="anchored" data-anchor-id="repeated-cross-sections">Repeated cross sections</h3>
+<p>The <code>csdid</code> package can also work with repeated cross section rather than panel data. If the data is repeated cross sections, simply set the option <code>panel = False</code>. In this case, <code>idname</code> is also ignored. From a usage standpoint, everything else is identical to the case with panel data.</p>
+</section>
+<section id="unbalanced-panel-data" class="level3">
+<h3 class="anchored" data-anchor-id="unbalanced-panel-data">Unbalanced Panel Data</h3>
+<p>By default, the <code>csdid</code> package takes in panel data and, if it is not balanced, coerces it into being a balanced panel by dropping units with observations that are missing in any time period. However, if the user specifies the option <code>allow_unbalanced_panel = True</code>, then the <code>csdid</code> package will not coerce the data into being balanced. Practically, the main cost here is that the computation time will increase in this case. We also recommend that users think carefully about why they have an unbalanced panel before proceeding this direction.</p>
+</section>
+<section id="alternative-estimation-methods" class="level3">
+<h3 class="anchored" data-anchor-id="alternative-estimation-methods">Alternative Estimation Methods</h3>
+<p>The <code>csdid</code> package implements all the <span class="math inline">\(2 \times 2\)</span> DiD estimators that are in the <code>DRDID</code> package. By default, the <code>csdid</code> package uses “doubly robust” estimators that are based on first step linear regressions for the outcome variable and logit for the generalized propensity score. The other options are “ipw” for inverse probability weighting and “reg” for regression.</p>
+<div id="2c5cc393" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>example_attgt_reg <span class="op">=</span> ATTgt(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    yname<span class="op">=</span><span class="st">"Y"</span>,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    tname<span class="op">=</span><span class="st">"period"</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    idname<span class="op">=</span><span class="st">"id"</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    gname<span class="op">=</span><span class="st">"G"</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    xformla<span class="op">=</span><span class="st">"Y~X"</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>dta</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>).fit(est_method<span class="op">=</span><span class="st">"reg"</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>example_attgt_reg.summ_attgt().summary2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Group</th>
+<th data-quarto-table-cell-role="th">Time</th>
+<th data-quarto-table-cell-role="th">ATT(g, t)</th>
+<th data-quarto-table-cell-role="th">Post</th>
+<th data-quarto-table-cell-role="th">Std. Error</th>
+<th data-quarto-table-cell-role="th">[95% Pointwise</th>
+<th data-quarto-table-cell-role="th">Conf. Band]</th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2</td>
+<td>2</td>
+<td>0.9191</td>
+<td>0</td>
+<td>0.0615</td>
+<td>0.7436</td>
+<td>1.0945</td>
+<td>*</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2</td>
+<td>3</td>
+<td>1.9861</td>
+<td>0</td>
+<td>0.0617</td>
+<td>1.8100</td>
+<td>2.1623</td>
+<td>*</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>2</td>
+<td>4</td>
+<td>2.9537</td>
+<td>0</td>
+<td>0.0620</td>
+<td>2.7768</td>
+<td>3.1306</td>
+<td>*</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>3</td>
+<td>2</td>
+<td>-0.0532</td>
+<td>0</td>
+<td>0.0651</td>
+<td>-0.2391</td>
+<td>0.1326</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>3</td>
+<td>3</td>
+<td>1.1106</td>
+<td>0</td>
+<td>0.0641</td>
+<td>0.9275</td>
+<td>1.2937</td>
+<td>*</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>3</td>
+<td>4</td>
+<td>2.0609</td>
+<td>0</td>
+<td>0.0649</td>
+<td>1.8755</td>
+<td>2.2462</td>
+<td>*</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>4</td>
+<td>2</td>
+<td>-0.0206</td>
+<td>0</td>
+<td>0.0625</td>
+<td>-0.1989</td>
+<td>0.1577</td>
+<td></td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>4</td>
+<td>3</td>
+<td>0.0672</td>
+<td>0</td>
+<td>0.0670</td>
+<td>-0.1240</td>
+<td>0.2583</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>4</td>
+<td>4</td>
+<td>0.9510</td>
+<td>0</td>
+<td>0.0654</td>
+<td>0.7643</td>
+<td>1.1378</td>
+<td>*</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>The argument <code>est_method</code> is also available to pass in a custom function for estimating DiD with 2 periods and 2 groups. <strong>Fair Warning:</strong> this is very advanced use of the <code>csdid</code> package and should be done with caution.</p>
+</section>
+</section>
+</section>
+<section id="an-example-with-real-data" class="level1">
+<h1>An example with real data</h1>
+<p>Next, we use a subset of data that comes from <a href="https://doi.org/10.1016/j.jeconom.2020.12.001">Callaway and Sant’Anna (2020)</a>. This is a dataset that contains county-level teen employment rates from 2003-2007. The data can be loaded by</p>
+<div id="a161910f" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>mpdta <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/d2cml-ai/csdid/function-aggte/data/mpdta.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>mpdta</code> is a balanced panel and the dataset looks like</p>
+<div id="0bd7216e" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mpdta.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">countyreal</th>
+<th data-quarto-table-cell-role="th">lpop</th>
+<th data-quarto-table-cell-role="th">lemp</th>
+<th data-quarto-table-cell-role="th">first.treat</th>
+<th data-quarto-table-cell-role="th">treat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2003</td>
+<td>8001</td>
+<td>5.896761</td>
+<td>8.461469</td>
+<td>2007</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2004</td>
+<td>8001</td>
+<td>5.896761</td>
+<td>8.336870</td>
+<td>2007</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>2005</td>
+<td>8001</td>
+<td>5.896761</td>
+<td>8.340217</td>
+<td>2007</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>2006</td>
+<td>8001</td>
+<td>5.896761</td>
+<td>8.378161</td>
+<td>2007</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>2007</td>
+<td>8001</td>
+<td>5.896761</td>
+<td>8.487352</td>
+<td>2007</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p><strong>Data Requirements</strong></p>
+<p>In particular applications, the dataset should look like this with the key parts being:</p>
+<ul>
+<li><p>The dataset should be in <em>long</em> format – each row corresponds to a particular unit at a particular point in time. Sometimes panel data is in <em>wide</em> format – each row contains all the information about a particular unit in all time periods.</p></li>
+<li><p>There needs to be an id variable. In <code>mpdta</code>, it is the variable <code>countyreal</code>. This should not vary over time for particular units. The name of this variable is passed to methods in the <code>csdid</code> package by setting, for example, <code>idname = "countyreal"</code></p></li>
+<li><p>There needs to be a time variable. In <code>mpdta</code>, it is the variable <code>year</code>. The name of this variable is passed to methods in the <code>csdid</code> package by setting, for example, <code>tname = "year"</code></p></li>
+<li><p>In this application, the outcome is <code>lemp</code>. The name of this variable is passed to methods in the <code>csdid</code> package by setting, for example, <code>yname = "lemp"</code></p></li>
+<li><p>There needs to be a group variable. In <code>mpdta</code>, it is the variable <code>first.treat</code>. This is the time period when an individual first becomes treated. <em>For individuals that are never treated, this variable should be set equal to 0.</em> The name of this variable is passed to methods in the <code>csdid</code> package by setting, for example, <code>gname = "first.treat"</code></p></li>
+<li><p>The <code>csdid</code> package allows for incorporating covariates so that the parallel trends assumption holds only after conditioning on these covariates. In <code>mpdta</code>, <code>lpop</code> is the log of county population. The <code>csdid</code> package requires that covariates be time-invariant. For time varying covariates, the <code>csdid</code> package sets the value of the covariate to be equal to the value of the covariate in the “base period” where, in post-treatment periods the base period is the period immediately before observations in a particular group become treated (when there is anticipation, it is before anticipation effects start too), and in pre-treatment periods the base period is the period right before the current period. Covariates are passed as a formula to the <code>csdid</code> package by setting, for example, <code>xformla = "lemp~lpop"</code>. For estimators under unconditional parallel trends, the <code>xformla</code> argument can be left blank or can be set as <code>xformla = "lemp~1"</code> to only include a constant.</p></li>
+</ul>
+<section id="the-effect-of-the-minimum-wage-on-youth-employment" class="level3">
+<h3 class="anchored" data-anchor-id="the-effect-of-the-minimum-wage-on-youth-employment">The Effect of the Minimum Wage on Youth Employment</h3>
+<p>Next, we walk through a straightforward, but realistic way to use the <code>csdid</code> package to carry out an application.</p>
+<p><strong>Side Comment:</strong> This is just an example of how to use our method in a real-world setup. To really evaluate the effect of the minimum wage on teen employment, one would need to be more careful along a number of dimensions. Thus, results displayed here should be interpreted as illustrative only.</p>
+<p>We’ll consider two cases. For the first case, we will not condition on any covariates. For the second, we will condition on the log of county population (in a “real” application, one might want to condition on more covariates).</p>
+<div id="6d19e433" class="cell" data-fig-width="2" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># estimate group-time average treatment effects without covariates</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>mw_attgt <span class="op">=</span> ATTgt(yname <span class="op">=</span> <span class="st">"lemp"</span>,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>              gname <span class="op">=</span> <span class="st">"first.treat"</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>              idname <span class="op">=</span> <span class="st">"countyreal"</span>,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>              tname <span class="op">=</span> <span class="st">"year"</span>,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>              xformla <span class="op">=</span> <span class="ss">f"lemp~1"</span>,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>              data <span class="op">=</span> mpdta,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>              panel <span class="op">=</span> <span class="va">True</span>,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>              </span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>              ).fit(est_method <span class="op">=</span> <span class="st">'reg'</span>)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>mw_attgt.summ_attgt(n <span class="op">=</span> <span class="dv">4</span>).summary2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="27">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Group</th>
+<th data-quarto-table-cell-role="th">Time</th>
+<th data-quarto-table-cell-role="th">ATT(g, t)</th>
+<th data-quarto-table-cell-role="th">Post</th>
+<th data-quarto-table-cell-role="th">Std. Error</th>
+<th data-quarto-table-cell-role="th">[95% Pointwise</th>
+<th data-quarto-table-cell-role="th">Conf. Band]</th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2004</td>
+<td>2004</td>
+<td>-0.0105</td>
+<td>0</td>
+<td>0.0237</td>
+<td>-0.0743</td>
+<td>0.0533</td>
+<td></td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2004</td>
+<td>2005</td>
+<td>-0.0704</td>
+<td>0</td>
+<td>0.0327</td>
+<td>-0.1583</td>
+<td>0.0175</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>2004</td>
+<td>2006</td>
+<td>-0.1373</td>
+<td>0</td>
+<td>0.0403</td>
+<td>-0.2457</td>
+<td>-0.0289</td>
+<td>*</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>2004</td>
+<td>2007</td>
+<td>-0.1008</td>
+<td>0</td>
+<td>0.0333</td>
+<td>-0.1905</td>
+<td>-0.0112</td>
+<td>*</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>2006</td>
+<td>2004</td>
+<td>0.0065</td>
+<td>0</td>
+<td>0.0242</td>
+<td>-0.0585</td>
+<td>0.0715</td>
+<td></td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>2006</td>
+<td>2005</td>
+<td>-0.0028</td>
+<td>0</td>
+<td>0.0198</td>
+<td>-0.0561</td>
+<td>0.0506</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>2006</td>
+<td>2006</td>
+<td>-0.0046</td>
+<td>0</td>
+<td>0.0185</td>
+<td>-0.0543</td>
+<td>0.0451</td>
+<td></td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>2006</td>
+<td>2007</td>
+<td>-0.0412</td>
+<td>0</td>
+<td>0.0204</td>
+<td>-0.0961</td>
+<td>0.0137</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>2007</td>
+<td>2004</td>
+<td>0.0305</td>
+<td>0</td>
+<td>0.0143</td>
+<td>-0.0080</td>
+<td>0.0690</td>
+<td></td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>2007</td>
+<td>2005</td>
+<td>-0.0027</td>
+<td>0</td>
+<td>0.0167</td>
+<td>-0.0476</td>
+<td>0.0421</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>2007</td>
+<td>2006</td>
+<td>-0.0311</td>
+<td>0</td>
+<td>0.0179</td>
+<td>-0.0791</td>
+<td>0.0169</td>
+<td></td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>2007</td>
+<td>2007</td>
+<td>-0.0261</td>
+<td>0</td>
+<td>0.0172</td>
+<td>-0.0723</td>
+<td>0.0202</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="0395ce43" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>mw_attgt.plot_attgt()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="csdid_basic_files/figure-html/cell-15-output-1.png" width="950" height="515" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>There are a few things to notice in this case</p>
+<ul>
+<li>There is some evidence of negative effects of the minimum wage on employment. Two group-time average treatment effects are negative and statistically different from 0. These results also suggest that it may be helpful to aggregate the group-time average treatment effects.</li>
+</ul>
+<div id="c3ab097e" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>mw_attgt.aggte(<span class="st">'calendar'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+Overall summary of ATT's based on calendar time aggregation:
+    ATT Std. Error  [95.0%  Conf. Int.]  
+-0.0417     0.0173 -0.0756      -0.0078 *
+
+
+Time Effects (calendar):
+   Time  Estimate  Std. Error  [95.0% Simult.   Conf. Band   
+0  2004   -0.0105      0.0233          -0.0561      0.0351   
+1  2005   -0.0704      0.0333          -0.1356     -0.0052  *
+2  2006   -0.0488      0.0198          -0.0876     -0.0100  *
+3  2007   -0.0371      0.0143          -0.0652     -0.0089  *
+---
+Signif. codes: `*' confidence band does not cover 0
+Control Group:  Never Treated , 
+Anticipation Periods:  0
+Estimation Method:  Outcome Regression
+
+</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="29">
+<pre><code>&lt;csdid.att_gt.ATTgt at 0x175fd2a6890&gt;</code></pre>
+</div>
+</div>
+<p>Finally, we can run all the same results including a covariate. In this application the results turn out to be nearly identical, and here we provide just the code for estimating the group-time average treatment effects while including covariates. The other steps are otherwise the same.</p>
+<div id="2cc7744e" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>mw_attgt_X <span class="op">=</span> ATTgt(yname <span class="op">=</span> <span class="st">"lemp"</span>,</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>              gname <span class="op">=</span> <span class="st">"first.treat"</span>,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>              idname <span class="op">=</span> <span class="st">"countyreal"</span>,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>              tname <span class="op">=</span> <span class="st">"year"</span>,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>              xformla <span class="op">=</span> <span class="ss">f"lemp~lpop"</span>,</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>              data <span class="op">=</span> mpdta,</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>              panel <span class="op">=</span> <span class="va">True</span>,</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>              </span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>              ).fit(est_method <span class="op">=</span> <span class="st">'reg'</span>)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>mw_attgt_X.summ_attgt(n <span class="op">=</span> <span class="dv">4</span>).summary2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="30">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Group</th>
+<th data-quarto-table-cell-role="th">Time</th>
+<th data-quarto-table-cell-role="th">ATT(g, t)</th>
+<th data-quarto-table-cell-role="th">Post</th>
+<th data-quarto-table-cell-role="th">Std. Error</th>
+<th data-quarto-table-cell-role="th">[95% Pointwise</th>
+<th data-quarto-table-cell-role="th">Conf. Band]</th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2004</td>
+<td>2004</td>
+<td>-0.0149</td>
+<td>0</td>
+<td>0.0235</td>
+<td>-0.0790</td>
+<td>0.0492</td>
+<td></td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2004</td>
+<td>2005</td>
+<td>-0.0770</td>
+<td>0</td>
+<td>0.0292</td>
+<td>-0.1566</td>
+<td>0.0026</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>2004</td>
+<td>2006</td>
+<td>-0.1411</td>
+<td>0</td>
+<td>0.0352</td>
+<td>-0.2369</td>
+<td>-0.0453</td>
+<td>*</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>2004</td>
+<td>2007</td>
+<td>-0.1075</td>
+<td>0</td>
+<td>0.0339</td>
+<td>-0.1999</td>
+<td>-0.0152</td>
+<td>*</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>2006</td>
+<td>2004</td>
+<td>-0.0021</td>
+<td>0</td>
+<td>0.0218</td>
+<td>-0.0615</td>
+<td>0.0574</td>
+<td></td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>2006</td>
+<td>2005</td>
+<td>-0.0070</td>
+<td>0</td>
+<td>0.0192</td>
+<td>-0.0593</td>
+<td>0.0454</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>2006</td>
+<td>2006</td>
+<td>0.0008</td>
+<td>0</td>
+<td>0.0188</td>
+<td>-0.0505</td>
+<td>0.0520</td>
+<td></td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>2006</td>
+<td>2007</td>
+<td>-0.0415</td>
+<td>0</td>
+<td>0.0208</td>
+<td>-0.0981</td>
+<td>0.0150</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>2007</td>
+<td>2004</td>
+<td>0.0264</td>
+<td>0</td>
+<td>0.0139</td>
+<td>-0.0115</td>
+<td>0.0643</td>
+<td></td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>2007</td>
+<td>2005</td>
+<td>-0.0048</td>
+<td>0</td>
+<td>0.0156</td>
+<td>-0.0472</td>
+<td>0.0377</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>2007</td>
+<td>2006</td>
+<td>-0.0285</td>
+<td>0</td>
+<td>0.0186</td>
+<td>-0.0791</td>
+<td>0.0221</td>
+<td></td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>2007</td>
+<td>2007</td>
+<td>-0.0288</td>
+<td>0</td>
+<td>0.0169</td>
+<td>-0.0750</td>
+<td>0.0174</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="common-issues-with-the-csdid-package" class="level2">
+<h2 class="anchored" data-anchor-id="common-issues-with-the-csdid-package">Common Issues with the csdid package</h2>
+<p>We update this section with common issues that people run into when using the <code>csdid</code> package. Please feel free to contact us with questions or comments.</p>
+<ul>
+<li>The <code>csdid</code> package is only built to handle staggered treatment adoption designs. This means that once an individual becomes treated, they remain treated in all subsequent periods.</li>
+</ul>
+</section>
+<section id="bugs" class="level2">
+<h2 class="anchored" data-anchor-id="bugs">Bugs</h2>
+<p>We also welcome (and encourage) users to report any bugs / difficulties they have using our code.</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
